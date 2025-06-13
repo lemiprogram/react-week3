@@ -20,13 +20,13 @@ function Todo({paras}) {
                 onChange={e=>checkFunc(e)}
                 defaultChecked={task.isChecked}
               />
-              <div className="task">{task.content}</div>
+              <div className="task">{task.content }</div>
             </label>
           </div>
           <div className="btn-section gap-4">
             <button 
               className="btn edit-btn"
-              onClick={()=>editFunc()}
+              onClick={()=>console.log(editFunc(task))}
             ><FaEdit/></button>
             <button 
               className="btn edit-btn "

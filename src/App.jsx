@@ -3,7 +3,7 @@ import './index.css'
 import './App.css'
 import { CgAdd } from "react-icons/cg";
 import Todo from './Components/Todo/Todo';
-
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -13,7 +13,7 @@ function App() {
     
   }
   const addTodoFunc = ()=>{
-    setTodos(t=>[...t,{id:t.length+1,content:"new Todo",isEditing:false,isChecked:false}])
+    setTodos(t=>[...t,{id:uuidv4(),content:"new Todo",isEditing:false,isChecked:false}])
   }
   const editFunc=()=>{
 
