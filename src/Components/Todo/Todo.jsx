@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 function Todo({paras}) {
   const {task,setTodos} = paras
   const deleteFunc = id=> setTodos(t=>t.filter(task=>task.id !== id))
+  const checkFunc = e=> task.isChecked = e.target.checked
   return(
     <>
       <li 
