@@ -14,10 +14,16 @@ function Todo({paras}) {
   const editFunc = ()=>setIsEditing(()=>true)
   const closeFunc = ()=>setIsEditing(()=>false)
   const saveFunc = id=>{
-    if(!taskInput.current.value){
+    
+    const inp = taskInput.current.value
+    if(!inp){
       errorMsg.current.classList.toggle("hidden")
       setTimeout(()=>errorMsg.current.classList.toggle("hidden"),1000)
+      return 
     }
+    
+    setTodos(t=>t.map(item=>item.id===id?{...item, content:inp}:item))
+    closeFunc()
   }
   return(
     <>
@@ -33,13 +39,13 @@ function Todo({paras}) {
                 <input type="text" ref={taskInput} />
               </div>
                 <div 
-                  className="hiddden text-red-500 errorMsg capitalize text-center"
+                  className="hidden text-red-500 errorMsg capitalize text-center"
                   ref={errorMsg}
                 >please input a Task</div>
               <div className="btn-section justify-center pt-5">
                 <button 
                   className="btn cancel-btn"
-                  onClick={()=>saveFunc()}
+                  onClick={()=>saveFunc(task.id)}
                 ><HiSaveAs/></button>
               </div>
             </div>
