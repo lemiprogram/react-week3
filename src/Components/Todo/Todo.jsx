@@ -1,13 +1,15 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { HiSaveAs } from "react-icons/hi";
 import { MdOutlineCancel,MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
+import { TodoContext } from '../../App';
+
 function Todo({paras}) {
   const taskInput = useRef(null)
   const errorMsg = useRef(null)
   const [isEditing, setIsEditing] = useState(false)
-  const {task,setTodos,todos,setProgress} = paras
+  const {task,setTodos,todos,setProgress} = useContext(TodoContext)
   task.isEditing = isEditing
   const deleteFunc = id=> setTodos(t=>t.filter(task=>task.id !== id))
   const checkFunc = e=> {
@@ -39,7 +41,12 @@ function Todo({paras}) {
               <div className="absolute top-2 right-2 cursor-pointer" onClick={()=>closeFunc()}><RxCross1/></div>
               <div className="inp">
                 <label htmlFor="">Task</label>
-                <input type="text" ref={taskInput} />
+                <input 
+                  type="text"
+                  ref={taskInput}
+                  onKeyDown={(e)=>e.key==="Enter"?saveFunc(task.id):""}
+                  defaultValue={task.content}
+                />
               </div>
                 <div 
                   className="hidden text-red-500 errorMsg capitalize text-center"
@@ -61,7 +68,7 @@ function Todo({paras}) {
                 onChange={e=>checkFunc(e)}
                 defaultChecked={task.isChecked}
               />
-              <div className="task">{task.content }</div>
+              <div className="task capitalize">{task.content }</div>
             </label>
             
           </div>

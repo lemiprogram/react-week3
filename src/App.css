@@ -10,7 +10,7 @@
     transition: 1s;
 }
 .btn:hover{
-    background-color: var(--bg-200);
+    background-color: var(--bg-300);
     color: var(--text-100);
 }
 
@@ -69,10 +69,11 @@ input{
     display: flex;
     justify-content: center;
     align-items: end;
+    align-self: center;
 }
 .progressBar{
     background-color: var(--primary-100);
     width: 100%;
-    transition-duration: 1s;
-    transform-style: preserve-3d;
+    transition-duration: 3s;
+    
 }
