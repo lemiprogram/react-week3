@@ -14,8 +14,23 @@ function App() {
   function renderTodos(){
     setProgress(()=>(todos.filter(item=>item.isChecked).length/todos.length)*100 +"%")
   }
-  const addTodoFunc = ()=>{
-    setTodos(t=>[...t,{id:uuidv4(),content:"new Todo",isChecked:false}])
+  const addTodoFunc = (content)=>{
+    setTodos(t=>[...t,{id:uuidv4(),content,isChecked:false}])
+  }
+  const addApiTodos = async()=>{
+    const content = await fetch("https://dummyjson.com/todos/random")
+                .then(res=>{
+                    if(!res.ok){
+                      console.log("This is the issue:")
+                    }
+                    return res.json()
+                    // myClass para is the class given to the 
+                })
+                .then(data=>data.todo)
+                .catch(err=>console.error(err))
+    
+    addTodoFunc(content)
+                            
   }
   
   return (
@@ -31,8 +46,12 @@ function App() {
               <div className="progressBar  w-4 rounded-full " style={todos.length?{height:progress}:{height:0}}></div>
             </div>
           </div>
-          <div className="btn-section justify-center">
-            <button className="btn add-todo" onClick={()=>addTodoFunc()}><CgAdd/></button>
+          <div className="btn-section justify-around">
+            <button className="btn add-todo" onClick={()=>addTodoFunc("New Todo")}><CgAdd/></button>
+            <button 
+              className='btn'
+              onClick={()=>addApiTodos()}
+            >Random </button>
           </div>
         </div>
       </div>
