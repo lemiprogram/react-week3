@@ -7,10 +7,13 @@ function Todo({paras}) {
   const taskInput = useRef(null)
   const errorMsg = useRef(null)
   const [isEditing, setIsEditing] = useState(false)
-  const {task,setTodos} = paras
+  const {task,setTodos,todos,setProgress} = paras
   task.isEditing = isEditing
   const deleteFunc = id=> setTodos(t=>t.filter(task=>task.id !== id))
-  const checkFunc = e=> task.isChecked = e.target.checked
+  const checkFunc = e=> {
+    task.isChecked = e.target.checked
+    setProgress(()=>(todos.filter(item=>item.isChecked).length/todos.length)*100 +"%")
+  }
   const editFunc = ()=>setIsEditing(()=>true)
   const closeFunc = ()=>setIsEditing(()=>false)
   const saveFunc = id=>{

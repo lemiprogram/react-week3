@@ -73,5 +73,6 @@ input{
 .progressBar{
     background-color: var(--primary-100);
     width: 100%;
-    transition: 1s;
+    transition-duration: 1s;
+    transform-style: preserve-3d;
 }
